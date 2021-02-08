@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+      <h1>Home</h1>
+
+        <div class="table100" style="padding-top:30px">
+
+            <table>
+              <thead>
+                <tr class="table100-head">
+                  <th class="column1">Course</th>
+                  <th class="column3">Company</th>
+                  <th class="column3">Hours</th>
+                  <th class="column3">Professor</th>
+                  <th class="column3">Place</th>
+                  <th class="column3">Price</th>
+                  <th class="column2">Comment</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in courses %}
+                  <tr onclick="window.location = '{{url_for('courseDetails' , course_id=course.id)}}' ;">
+                    <td class="column1">{{course.course}}</td>
+                    <td class="column3">{{course.company}}</td>
+                    <td class="column3">{{course.hours}}</td>
+                    <td class="column3">{{teachers[courses.index(course)].name}}</td>
+                    <td class="column3">{{course.place}}</td>
+                    <td class="column3">{{course.price}}</td>
+                    <td class="column6">{{course.comment}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <div style="padding-left:34vw;padding-top:30px;" >
+              <button class="btn btn-danger" style="width:10vw"
+              onclick="window.location = '{{url_for('courses')}}'" >
+                    See More
+                </button>
+            </div>
+
+    </div>
+
+    <div style="overflow:hidden">
+
+
+    <div class="table100" style="width:30vw; padding-top:10vh;float:left">
+      <table>
+        <thead>
+          <tr class="table100-head">
+          <th class="column1">
+            Professors
+          </th>
+        </tr>
+        </thead>
+
+        {% for prof in profs %}
+          <tr>
+            <td class="column1">{{prof}}</td>
+          </tr>
+        {% endfor %}
+
+
+      </table>
+      <div style="padding-left:9vw;padding-top:30px" >
+        <button class="btn btn-danger" style="width:10vw" onclick="window.location = '{{url_for('profs')}}'" >
+              See More
+          </button>
+
+      </div>
+    </div>
+
+
+
+    <div class="table100" style="width:46vw; padding-top:10vh; padding-left:30vh;overflow:hidden">
+      <table>
+        <thead>
+          <tr class="table100-head">
+          <th class="column1">
+            Students
+          </th>
+        </tr>
+        </thead>
+
+        {% for s in students %}
+          <tr>
+            <td class="column1">{{s}}</td>
+          </tr>
+        {% endfor %}
+
+
+      </table>
+
+      <div style="padding-left:10vw;padding-top:30px" >
+        <button class="btn btn-danger" style="width:10vw" onclick="window.location = '{{url_for('students' , course_id=0 , existing=0)}}'" >
+              See More
+          </button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+    {% endblock content %}

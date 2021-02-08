@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Students</h1>
+<div class="table100" style="padding-top:40px;">
+  <table>
+    <thead>
+      <tr class="table100-head">
+      <th class="column1">
+        Student
+      </th>
+      <th class="column1"> Phone </th>
+      <th class="column1"> Email </th>
+    </tr>
+    </thead>
+
+    {% for s in students %}
+      {% if existing %}
+      <tr onclick="window.location = '{{url_for('addStudent' , course_id=existing , fromOld=True , id = s.id )}}' ;">
+      {% else %}
+      <tr onclick="window.location = '{{url_for('studentCourses' , sid=s.id)}}' ;">
+      {% endif %}
+        <td class="column1">{{s.fullName}}</td>
+        <td class="column1">{{s.phone}}</td>
+        <td class="column1">{{s.email}}</td>
+      </tr>
+    {% endfor %}
+
+
+  </table>
+</div>
+
+{% endblock content %}

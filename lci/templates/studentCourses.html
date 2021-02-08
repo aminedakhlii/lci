@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{name}}'s courses</h1>
+<div class="table100" style="padding-top:50px">
+  <table>
+    <thead>
+      <tr class="table100-head">
+      <th class="column1">
+        Course
+      </th>
+      <th class="column1"> Professor </th>
+      <th class="column1"> Status </th>
+    </tr>
+    </thead>
+
+    {% for course in courses %}
+      <tr onclick="window.location = '{{url_for('courseDetails' , course_id=course.id)}}'">
+        <td class="column1">{{course.course}}</td>
+        <td class="column1">{{profs[courses.index(course)].name}}</td>
+        {% if stats[courses.index(course)] %}
+        <td class="column1">Completed</td>
+        {% else %}
+        <td class="column1">Not Completed</td>
+        {% endif %}
+
+      </tr>
+    {% endfor %}
+
+
+  </table>
+</div>
+
+{% endblock content %}

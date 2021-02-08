@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if user %}
+<div class="table100" style="padding-top:40px;">
+  <table>
+    <thead>
+      <tr class="table100-head">
+      <th class="column1">
+        Student
+      </th>
+      <th class="column1"> Phone </th>
+      <th class="column1"> Email </th>
+    </tr>
+    </thead>
+      {% for u in user %}
+      <tr onclick="window.location = '{{url_for('studentCourses' , sid=u.id)}}' ;">
+        <td class="column1">{{u.fullName}}</td>
+        <td class="column1">{{u.phone}}</td>
+        <td class="column1">{{u.email}}</td>
+      </tr>
+      {% endfor %}
+
+
+  </table>
+</div>
+{% else %}
+<h1>No one matches</h1>
+{% endif %}
+{% endblock content %}

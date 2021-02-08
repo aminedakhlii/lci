@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="display:flex;flex-direction:column">
+<object type="application/pdf" data="{{url_for('static' , filename='pos/' + course.company + '.pdf')}}"
+width="900" height="600">
+</object>
+<div class="btn btn-success"  style="margin-top:2vw;float:left" onclick="window.location = '{{url_for('courseDetails' , course_id=course.id)}}', 'Results';">
+  back to course
+</div>
+</div>
+{% endblock content %}

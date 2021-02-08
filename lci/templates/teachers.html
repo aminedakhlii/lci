@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Professors</h1>
+<div class="table100" style="padding-top:30px">
+  <table>
+    <thead>
+      <tr class="table100-head">
+      <th class="column1">
+        Professors
+      </th>
+      <th class="column6"> Phone </th>
+      <th class="column6"> Email </th>
+      <th class="column6"> Recap Hours </th>
+    </tr>
+    </thead>
+
+    {% for prof in profs %}
+      <tr onclick="window.location = '{{url_for('profModify' , prof_id=prof.id)}}', 'test';">
+        <td class="column1">{{prof.name}}</td>
+        <td class="column6">{{prof.phone}}</td>
+        <td class="column6">{{prof.email}}</td>
+        <td class="column6">{{prof.recapHours}}</td>
+      </tr>
+    {% endfor %}
+
+
+  </table>
+</div>
+
+{% endblock content %}

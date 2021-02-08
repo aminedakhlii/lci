@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div style="display : flex">
+            <fieldset class="form-group">
+                <h1>Modify Professor</h1>
+                </br></br>
+                <div style="display:flex">
+                <div style="margin-left:4vw">
+                <div class="form-group" >
+                    {{ form.name.label(class="form-control-label") }}
+
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg", value=prof.name) }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg", value=prof.email) }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.phone.label(class="form-control-label") }}
+                    {% if form.phone.errors %}
+                        {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.phone(class="form-control form-control-lg", value=prof.phone ) }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.recapHours.label(class="form-control-label") }}
+                    {% if form.recapHours.errors %}
+                        {{ form.recapHours(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.recapHours.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.recapHours(class="form-control form-control-lg" , value=prof.recapHours) }}
+                    {% endif %}
+                </div>
+
+                </div>
+                </div>
+            </fieldset>
+            <div class="form-group" style="margin-left:5vw;margin-top:17vw;">
+                {{ form.submit(class="btn btn-danger" , style="width:10vw") }}
+            </div>
+            </div>
+        </form>
+
+{% endblock content %}

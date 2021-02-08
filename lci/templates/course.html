@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="">
+
+<h1 style="float:left">{{name}}</h1>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="height:100px">
+  {% if over %}
+    <circle cx="50" cy="26" r="15" fill="#32cd00"/>
+  {% else %}
+    <circle cx="50" cy="26" r="15" fill="red" />
+  {% endif %}
+</svg>
+</div>
+
+<div class="btn btn-danger" style=" " onclick="
+
+var answer = confirm('are you sure you want to delete {{name}} ?');
+if(answer) window.location = '{{ url_for('delete' , courseid=course_id)}}'
+
+" >
+Remove Course</div>
+<div class="btn btn-danger" style="" onclick="window.location = '{{ url_for('prepareCertifs' , cid=course_id)}}'" >
+Prepare Certificates</div>
+<div class="btn btn-danger" style="" onclick="window.location = '{{ url_for('PurchaseOrder' , courseid=course_id)}}'" >
+Purchase Order</div>
+<div class="btn btn-danger" style="" onclick="window.location = '{{ url_for('courseModify' , courseid=course_id)}}'" >
+Modify Course</div>
+
+<div class="table100" style="padding-top:5vh;">
+
+  <table >
+    <thead>
+      <tr class="table100-head">
+      <th class="column1">
+        Student
+      </th>
+      <th class="column1">
+        Email
+      </th>
+      <th class="column1">
+        Phone
+      </th>
+      {% if over and not checked %}
+      <th class="column1">
+        Passed
+      </th>
+      {% endif %}
+    </tr>
+    </thead>
+
+    {% for student in students %}
+      <tr>
+        <td class="column1" onclick="
+
+          var answer = confirm('are you sure you want to remove {{student.fullName}} ?');
+          if (answer) window.location = '{{url_for('removeStudentFromCourse' , sid=student.id , cid=course_id)}}'
+
+        ">{{student.fullName}}</td>
+        <td class="column1">{{student.email}}</td>
+        <td class="column1">{{student.phone}}</td>
+        {% if over and not checked %}
+        <th class="column1">
+            <input type="checkbox" name="passedcheck" id="{{student.id}}" value="">
+        </th>
+        {% endif %}
+      </tr>
+    {% endfor %}
+
+  </table>
+
+</div>
+
+<div class="btn btn-danger" style="margin-left:21vw;margin-top:5vw" onclick="window.location = '{{url_for('addStudent' , course_id=course_id , fromOld=False , id=0)}}', 'Add Student';">
+  Add Student
+</div>
+{% if over and not checked %}
+<input type="submit" class="btn btn-success" style="margin-top:5vw" onclick="
+  let passed = [] ;
+
+  {% for student in students %}
+      if (document.getElementById({{student.id}}).checked)
+        passed.push({{student.id}}) ;
+  {% endfor %}
+
+  get('{{url_for('validateCourse' , courseid = course_id)}}',passed);
+
+
+">
+
+{% endif %}
+{% if over and checked %}
+<div class="btn btn-success" style="margin-top:5vw;" onclick="window.location = '{{url_for('results' , courseid=course_id)}}', 'Results';">
+  See Results
+</div>
+{% endif %}
+{% endblock content %}

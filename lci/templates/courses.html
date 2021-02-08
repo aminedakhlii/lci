@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Courses</h1>
+
+<div class="table100" style="padding-top:30px;width:90vw">
+
+    <table>
+      <thead>
+        <tr class="table100-head">
+          <th class="column1">Course</th>
+          <th class="column3">Type</th>
+          <th class="column3">Company name</th>
+          <th class="column3">Hours</th>
+          <th class="column3">Professor</th>
+          <th class="column3">Book</th>
+          <th class="column3">Place</th>
+          <th class="column3">Price</th>
+          <th class="column1">Start Date</th>
+          <th class="column1">End Date</th>
+          <th class="column6">Comment</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr onclick="window.location = '{{url_for('courseDetails' , course_id=course.id)}}' ;">
+            <td class="column1">{{course.course}}</td>
+            <td class="column3">{{course.type}}</td>
+            <td class="column3">{{course.company}}</td>
+            <td class="column3">{{course.hours}}</td>
+            <td class="column3">{{names[courses.index(course)].name}}</td>
+            <td class="column3">{{course.book}}</td>
+            <td class="column3">{{course.place}}</td>
+            <td class="column3">{{course.price}}</td>
+            <td class="column1">{{course.start.strftime('%d/%m/%Y')}}</td>
+            <td class="column1">{{course.end.strftime('%d/%m/%Y')}}</td>
+            <td class="column6">{{course.comment}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+
+
+{% endblock content %}
